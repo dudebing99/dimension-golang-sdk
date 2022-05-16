@@ -966,7 +966,7 @@ func buildTransfer(amount *big.Int, target *keypair.PublicKey, sourcePurse strin
 	var accountHex string
 
 	if target.Tag == keypair.KeyTagEd25519 {
-		accountHex = ed25519.AccountHash(target.PubKeyData)
+		accountHex = ed25519.AccountHex(target.PubKeyData)
 	} else {
 		// FIXME: implement secp256k1 module
 		return nil
@@ -1012,7 +1012,7 @@ func buildTransfer(amount *big.Int, target *keypair.PublicKey, sourcePurse strin
 			StringBytes: hex.EncodeToString(amountBytes),
 		},
 		"target": {
-			Tag:         types.CLTypeByteArray,
+			Tag:         types.CLTypePublicKey,
 			StringBytes: accountHex,
 		},
 		"id": idValue,
